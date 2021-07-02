@@ -1,10 +1,13 @@
 package com.fanhoufang.controller;
 
 
+import com.fanhoufang.common.lang.Result;
+import com.fanhoufang.entity.User;
 import com.fanhoufang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,9 +25,10 @@ public class UserController {
     @Autowired
     UserService UserService;
 
-    @RequestMapping("index")
-    public Object index(){
-        return UserService.getById(1L);
+    @RequestMapping(value = "index", method = RequestMethod.GET)
+    public Result index(){
+        User user = UserService.getById(1L);
+        return Result.success(user);
     }
 
 }
