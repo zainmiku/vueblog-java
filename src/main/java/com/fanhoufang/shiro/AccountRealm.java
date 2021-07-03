@@ -18,6 +18,8 @@ public class AccountRealm extends AuthorizingRealm {
 
     @Autowired
     UserService userService;
+    @Autowired
+    JwtUtils jwtUtils;
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof JwtToken;
@@ -31,7 +33,7 @@ public class AccountRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         JwtToken jwtToken = (JwtToken) authenticationToken;
-        String userId = JwtUtils.getClaimByToken(String.valueOf(jwtToken.getPrincipal())).getSubject();
+        String userId = jwtUtils.getClaimByToken(String.valueOf(jwtToken.getPrincipal())).getSubject();
         User user = userService.getById(Long.valueOf(userId));
         if(user==null){
             throw new UnknownAccountException("账号不存在");

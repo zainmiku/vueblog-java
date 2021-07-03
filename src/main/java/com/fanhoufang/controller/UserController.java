@@ -6,10 +6,8 @@ import com.fanhoufang.entity.User;
 import com.fanhoufang.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -30,6 +28,11 @@ public class UserController {
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public Result index(){
         User user = UserService.getById(1L);
+        return Result.success(user);
+    }
+    @PostMapping(value = "seve")
+    public Result seve(@Validated @RequestBody User user){
+
         return Result.success(user);
     }
 

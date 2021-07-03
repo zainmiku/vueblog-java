@@ -19,14 +19,14 @@ import java.util.Date;
 @ConfigurationProperties(prefix = "shiroc-config.jwt")
 public class JwtUtils {
 
-    private static String secret;
-    private static long expire;
-    private static String header;
+    private  String secret;
+    private  long expire;
+    private  String header;
 
     /**
      * 生成jwt token
      */
-    public static String generateToken(long userId) {
+    public  String generateToken(long userId) {
         Date nowDate = new Date();
         //过期时间
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
@@ -40,7 +40,7 @@ public class JwtUtils {
                 .compact();
     }
 
-    public static Claims getClaimByToken(String token) {
+    public  Claims getClaimByToken(String token) {
         try {
             return Jwts.parser()
                     .setSigningKey(secret)
@@ -56,7 +56,7 @@ public class JwtUtils {
      * token是否过期
      * @return  true：过期
      */
-    public static boolean isTokenExpired(Date expiration) {
+    public  boolean isTokenExpired(Date expiration) {
         return expiration.before(new Date());
     }
 }
