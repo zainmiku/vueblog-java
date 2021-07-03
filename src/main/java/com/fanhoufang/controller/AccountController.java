@@ -9,6 +9,7 @@ import com.fanhoufang.common.lang.Result;
 import com.fanhoufang.entity.User;
 import com.fanhoufang.service.UserService;
 import com.fanhoufang.util.JwtUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author: fan
  * @create: 2021-07-03 18:20
  **/
+@Slf4j
 @RestController
 public class AccountController {
     @Autowired
@@ -35,6 +37,7 @@ public class AccountController {
 
     @PostMapping ("login")
     public Result login(@Validated @RequestBody LoginDto loginDto , HttpServletResponse response){
+        log.info("登录接口入参--------------{}"+loginDto);
         User user = userService.getOne(new QueryWrapper<User>().eq("username", loginDto.getUsername()));
         Assert.notNull(user,"用户不存在");
         if(!user.getPassword().equals(SecureUtil.md5(loginDto.getPassword()))){
@@ -58,6 +61,7 @@ public class AccountController {
     @RequiresAuthentication
     @PostMapping ("logout")
     public Result logout(){
+        log.info("注销接口入参--------------{}");
         SecurityUtils.getSubject().logout();
         return Result.success(null);
 

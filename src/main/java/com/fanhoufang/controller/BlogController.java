@@ -9,6 +9,7 @@ import com.fanhoufang.common.lang.Result;
 import com.fanhoufang.entity.Blog;
 import com.fanhoufang.service.BlogService;
 import com.fanhoufang.util.ShiroUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -25,6 +26,7 @@ import java.time.LocalDateTime;
  * @author fanhoufang
  * @since 2021-07-02
  */
+@Slf4j
 @RestController
 @RequestMapping("/blog")
 public class BlogController {
@@ -33,12 +35,14 @@ public class BlogController {
     BlogService blogService;
     @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize){
+        log.info("博客列表查询接口入参--------------{}"+"pageNum="+pageNum+"pageSize="+pageSize);
         Page page = new Page(pageNum,pageSize);
         IPage iPage = blogService.page(page, new QueryWrapper<Blog>().orderByDesc("created"));
         return Result.success(iPage);
     }
     @GetMapping("/{id}")
     public Result list(@PathVariable(name = "id") Long id){
+        log.info("博客根据id查询接口入参--------------{}"+"id="+id);
         Blog blog = blogService.getById(id);
         Assert.notNull(blog,"该博客不存在");
         return Result.success(blog);
@@ -46,7 +50,7 @@ public class BlogController {
     @RequiresAuthentication
     @PutMapping ("/edit")
     public Result list(@Validated @RequestBody Blog blog){
-
+        log.info("博客编辑接口入参--------------{}"+"blog="+blog);
             Blog temp = null;
             if(blog.getId() != null) {
                 temp = blogService.getById(blog.getId());
