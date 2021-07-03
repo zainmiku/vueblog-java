@@ -4,6 +4,7 @@ package com.fanhoufang.controller;
 import com.fanhoufang.common.lang.Result;
 import com.fanhoufang.entity.User;
 import com.fanhoufang.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +26,7 @@ public class UserController {
     @Autowired
     UserService UserService;
 
+    @RequiresAuthentication
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public Result index(){
         User user = UserService.getById(1L);
