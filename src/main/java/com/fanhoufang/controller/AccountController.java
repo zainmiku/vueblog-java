@@ -9,6 +9,8 @@ import com.fanhoufang.common.lang.Result;
 import com.fanhoufang.entity.User;
 import com.fanhoufang.service.UserService;
 import com.fanhoufang.util.JwtUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -29,12 +31,13 @@ import javax.servlet.http.HttpServletResponse;
  **/
 @Slf4j
 @RestController
+@Api(tags = "登录相关接口")
 public class AccountController {
     @Autowired
     UserService userService;
     @Autowired
     JwtUtils jwtUtils;
-
+    @ApiOperation(value = "用户登录接口",httpMethod = "POST")
     @PostMapping ("login")
     public Result login(@Validated @RequestBody LoginDto loginDto , HttpServletResponse response){
         log.info("登录接口入参--------------{}"+loginDto);
@@ -59,6 +62,7 @@ public class AccountController {
     }
 
     @RequiresAuthentication
+    @ApiOperation(value = "用户注销接口",httpMethod = "POST")
     @PostMapping ("logout")
     public Result logout(){
         log.info("注销接口入参--------------{}");

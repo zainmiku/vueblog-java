@@ -83,7 +83,13 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
         </dependency>
-        
+
+        <!--springfox swagger官方Starter-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -169,7 +175,7 @@
 
         </plugins>
 
-        <resources>
+<!--        <resources>
             <resource>
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
@@ -182,7 +188,7 @@
                     <exclude>*.txt</exclude>
                 </excludes>
             </resource>
-        </resources>
+        </resources>-->
 
     </build>
 
