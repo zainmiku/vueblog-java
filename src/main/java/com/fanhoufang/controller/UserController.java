@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021-07-02
  */
 @RestController
-@Api(tags = "用户集相关接口")
+@Api(tags = "用户相关接口")
 @RequestMapping("/user")
 public class UserController {
 

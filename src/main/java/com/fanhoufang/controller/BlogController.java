@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@Api(tags = "博客集相关接口")
+@Api(tags = "博客相关接口")
 @RequestMapping("/blog")
 public class BlogController {
 

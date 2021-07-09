@@ -6,10 +6,12 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.oas.annotations.EnableOpenApi;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
+
+import java.util.Collections;
 
 /**
 * Swagger配置类
@@ -24,6 +26,19 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                // 是否启用Swagger
                 .enable(true)
+
+               .securitySchemes(Collections.singletonList(HttpAuthenticationScheme.JWT_BEARER_BUILDER
+//                        显示用
+                       .name("JWT")
+                       .build()))
+               .securityContexts(Collections.singletonList(SecurityContext.builder()
+                       .securityReferences(Collections.singletonList(SecurityReference.builder()
+                               .scopes(new AuthorizationScope[0])
+                               .reference("JWT")
+                               .build()))
+                       // 声明作用域
+                       .operationSelector(o -> o.requestMappingPattern().matches("/.*"))
+                       .build()))
                // 设置哪些接口暴露给Swagger展示
                 .select()
                 //apis： 添加swagger接口提取范围
