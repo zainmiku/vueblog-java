@@ -152,8 +152,8 @@
                     <layout>ZIP</layout>
                     <includes>
                         <include>
-                            <groupId>cn.jstars</groupId>
-                            <artifactId>datatocloud</artifactId>
+                            <groupId>nothing</groupId>
+                            <artifactId>nothing</artifactId>
                         </include>
                     </includes>
                 </configuration>

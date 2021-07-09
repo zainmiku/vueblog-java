@@ -60,7 +60,7 @@ public class SwaggerConfig {
                 .title("博客demo项目接口文档")
                 .description("描述：用于管理接口")
                 .contact(new Contact("fanhoufang", null, "fanhoufang@gmail.com"))
-                .version("3.0")
+                .version("0.1")
                 .build();
     }
 }

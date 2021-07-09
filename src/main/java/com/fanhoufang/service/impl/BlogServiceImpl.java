@@ -45,7 +45,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
         Blog temp = null;
         if (blog.getId() != null) {
             temp = getById(blog.getId());
-            Assert.isTrue(temp.getUserId() != ShiroUtil.getProfile().getId(), "没有权限编辑");
+            Assert.isTrue(temp.getUserId().equals(ShiroUtil.getProfile().getId()), "没有权限编辑");
         } else {
             temp = new Blog();
             temp.setUserId(ShiroUtil.getProfile().getId());
