@@ -33,10 +33,19 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @Api(tags = "登录相关接口")
 public class AccountController {
-    @Autowired
+/*    @Autowired
     UserService userService;
     @Autowired
-    JwtUtils jwtUtils;
+    JwtUtils jwtUtils;*/
+
+    private final UserService userService;
+    private final JwtUtils jwtUtils;
+
+    public AccountController(UserService userService, JwtUtils jwtUtils) {
+        this.userService = userService;
+        this.jwtUtils = jwtUtils;
+    }
+
     @ApiOperation(value = "用户登录接口",httpMethod = "POST")
     @PostMapping ("login")
     public Result login(@Validated @RequestBody LoginDto loginDto , HttpServletResponse response){
