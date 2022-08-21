@@ -1,6 +1,7 @@
 package com.fanhoufang.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fanhoufang.common.lang.Result;
 import com.fanhoufang.entity.Blog;
 import com.fanhoufang.service.BlogService;
@@ -31,14 +32,14 @@ public class BlogController {
 
     @ApiOperation(value = "博客列表查询接口", httpMethod = "GET")
     @GetMapping("/list")
-    public Result list(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize) {
+    public IPage list(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize) {
         log.info("博客列表查询接口入参--------------{}" + "pageNum=" + pageNum + "pageSize=" + pageSize);
         return blogService.list(pageNum, pageSize);
     }
 
     @ApiOperation(value = "博客id查询接口", httpMethod = "GET")
     @GetMapping("/{id}")
-    public Result getInfo(@PathVariable(name = "id") Long id) {
+    public Blog getInfo(@PathVariable(name = "id") Long id) {
         log.info("博客根据id查询接口入参--------------{}" + "id=" + id);
         return blogService.getInfo(id);
     }
@@ -46,16 +47,16 @@ public class BlogController {
     @RequiresAuthentication
     @ApiOperation(value = "博客编辑接口", httpMethod = "PUT")
     @PutMapping("/edit")
-    public Result edit(@Validated @RequestBody Blog blog) {
+    public void edit(@Validated @RequestBody Blog blog) {
         log.info("博客编辑接口入参--------------{}" + "blog=" + blog);
-        return blogService.edit(blog);
+        blogService.edit(blog);
     }
 
     @ApiOperation(value = "博客根据id删除接口", httpMethod = "DELETE")
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable(name = "id") Long id) {
+    public void delete(@PathVariable(name = "id") Long id) {
         log.info("博客根据id删除接口入参--------------{}" + "id=" + id);
-        return blogService.delete(id);
+        blogService.delete(id);
     }
 
 }

@@ -1,8 +1,11 @@
 package com.fanhoufang.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fanhoufang.common.lang.Result;
 import com.fanhoufang.entity.Blog;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,11 +16,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-07-02
  */
 public interface BlogService extends IService<Blog> {
-    Result list(Integer pageNum,Integer pageSize);
+    IPage list(Integer pageNum, Integer pageSize);
 
-    Result getInfo(Long id);
+    Blog getInfo(Long id);
 
-    Result edit(Blog blog);
+    void edit(Blog blog);
 
-    public Result delete(Long id);
+    public void delete(Long id);
 }

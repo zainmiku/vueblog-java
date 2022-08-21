@@ -23,17 +23,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    UserService UserService;
+//    @Autowired
+//    UserService userService;
+ private UserService userService;
+
+ public  void setUserService(UserService userService){
+     this.userService = userService;
+ }
+
 
     @RequiresAuthentication
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public Result index(){
-        User user = UserService.getById(1L);
+        User user = userService.getById(1L);
         return Result.success(user);
     }
-    @PostMapping(value = "seve")
-    public Result seve(@Validated @RequestBody User user){
+    @PostMapping(value = "save")
+    public Result save(@Validated @RequestBody User user){
 
         return Result.success(user);
     }
